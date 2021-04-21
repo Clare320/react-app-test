@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import  VConsole from 'vconsole';
+import VConsole from 'vconsole';
 import JSToNative from './utils/JSToNative';
-import NativeToJS from './utils/NativeToJS';
-import TabController from './tab-controller';
+import Modal from './pages/TestPortalsPage'
 
 import './App.css';
 
@@ -16,8 +15,9 @@ let vConsole;
 
 
 function App() {
-	const url  = 'sl://lingjie.com/test?name=lj&age=18';
+	const url = 'sl://lingjie.com/test?name=lj&age=18';
 
+	const [show, setShow] = useState(false);
 	const [loginResult, setLoginResult] = useState('');
 
 	const onFuncButtonClick = () => {
@@ -36,19 +36,48 @@ function App() {
 		});
 	}
 
+	const showModal = () => {
+		setShow(true);
+	};
+
+	const dismissModal = () => {
+		setShow(false);
+	};
+
+	const renderGrid = (
+		<div className='gridContainer'>
+			<div className='box1'>1</div>
+			<div className='box1'>2</div>
+			<div className='box1'>3</div>
+			<div className='box1'>4</div>
+			<div className='box1'>5</div>
+			<div className='box1'>6</div>
+		</div>
+	);
+
+	const renderModal = (
+		<div>
+			<div className='button' onClick={showModal}>showModal</div>
+		</div>
+	);
+
+	const modal = (
+		show ?
+			(<Modal>
+				<div className='modal'>
+					This is a modal page.
+				<div className='button' onClick={dismissModal}>dismiss modal</div>
+				</div>
+			</Modal>)
+			:
+			null
+	);
 
 	return (
 		<div className='container'>
-			<div className='gridContainer'>
-				<div className='box1'>1</div>
-				<div className='box1'>2</div>
-				<div className='box1'>3</div>
-				<div className='box1'>4</div>
-				<div className='box1'>5</div>
-				<div className='box1'>6</div>
-			</div>
+			{renderModal}
 			<div className='button' onClick={onFuncButtonClick}>post message</div>
-			<div 
+			<div
 				className='button'
 				onClick={onSchemeClick}
 			>send scheme</div>
@@ -57,7 +86,7 @@ function App() {
 				login
 			</div>
 			<span>loginResult: {loginResult}</span>
-			<TabController style={{ flex: '1' }}/>
+			{modal}
 		</div>
 	);
 }

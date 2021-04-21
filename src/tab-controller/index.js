@@ -24,7 +24,6 @@ export default class TabController extends Component {
     
     render() {
         const { index, controllers } = this.state;
-        const viewController = controllers[index];
         return (
             <div className={styles.container}>
                 <div className={styles.tab}>
