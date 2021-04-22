@@ -2,6 +2,7 @@ import { useState } from 'react';
 import VConsole from 'vconsole';
 import JSToNative from './utils/JSToNative';
 import Modal from './pages/TestPortalsPage'
+import TestTSPage from './pages/TestTSPage'
 
 import './App.css';
 
@@ -86,6 +87,7 @@ function App() {
 				login
 			</div>
 			<span>loginResult: {loginResult}</span>
+			<TestTSPage />
 			{modal}
 		</div>
 	);
